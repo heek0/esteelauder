@@ -61,12 +61,11 @@ $(function(){
 
     //개별 삭제버튼
     $('.popup-cart').on('click', '.btn-del', function(){
-        $('.icon-cart2').removeClass('on');
-        //삭제하려는 제품의 키값
+        
         var key = $(this).parents('li').data('key');
         $(this).parents('li').remove();
         
-            $('.item [data-key='+key+']').find('.icon-cart2').removeClass('on');
+            $('.product [data-key='+key+']').find('.icon-cart2').removeClass('on');
             if($(this).parents('li').find('input').prop('checked')){
                 shoppingCount--;
             }
@@ -83,13 +82,12 @@ $(function(){
         var checkCount=0;
         var contentsName= $(this).parents('.cart-list').attr('id');
         $(this).parents('.cart-list').find('li input').each(function(){
-            //$(this) 리스트 안에 있는 체크박스 상태
+           
             if($(this).prop('checked')){
                 checkCount++;
                 var key= $(this).parents('li').data('key');
-                $('.item li').each(function(){
-                    //$(this) => .item li
-                    //팝업창 안에 있는 체크된 리스트의 키값과 상품목록(.item)에 있는 리스트의 키값이 일치할 경우
+                $('.product li').each(function(){
+                    //팝업창 안에 있는 체크된 리스트의 키값과 상품목록에 있는 리스트의 키값이 일치할 경우
                     if($(this).data('key')==key){
                         $(this).find('.icon-cart2').removeClass('on');
                         shoppingCount--;
@@ -97,8 +95,6 @@ $(function(){
                     }
                 })
                 $(this).parents('li').remove();
-                shoppingCount--;
-                $(this).find('.icon-cart2').removeClass('on');
             }
         })
         $(this).parents('.popup-cart').find('.top input').prop('checked',false);
@@ -164,16 +160,12 @@ $(function(){
     //금액합산
     function totalPrice(){
         var total=0;
-        // console.log('가격과 수량체크');
         $('#shopping li').each(function(){
-            //만약 각 리스트에 접근해서 체크박스가 체크가 되어있다면
             if($(this).find('input').prop('checked')){
-                //각 리스트의 상품 가격
-                //현재 금액은 30,000원의 형태로 나오고 있으므로 숫자로 변환
                 var price=parseInt($(this).find('strong').text().substring(4).replace(',',''));
                 //각 리스트의 상품 수량(문자열을 숫자로 변환)
                 var count=parseInt($(this).find('.count-change span').text());                                
-                console.log(price, count);     
+                // console.log(price, count);     
                 total=total+(price*count);           
             }
         })
