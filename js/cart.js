@@ -22,7 +22,7 @@ $(function(){
         var key =$(this).parents('li').data('key'); 
         var imgSrc =$(this).parents('li').find('img').attr('src');
         var name = $(this).parents('li').find('dt').text();
-        var detail = $(this).parents('li').find('dd').text();
+        var detail = $(this).parents('li').find('.info .swiper-slide-active a').text();
         var price;      
         
         if($(this).parents('li').find('.info .swiper-container').length!=0){
